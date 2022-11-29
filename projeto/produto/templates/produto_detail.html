@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+ {% block content %}
+{% if user.is_authenticated %}
+
+   <h1>{{ object }}
+     <span class="pull-right">
+         <a href="{% url 'produto:produto_list' %}">
+                <button type="button" class="btn btn-primary">
+                  voltar
+                </button>
+         </a>
+         <a href="{% url 'produto:produto_edit' object.pk %}">
+             <button type="button" class="btn btn-success">
+                 <span class="fa fa-pencil"></span>Editar
+             </button>
+         </a>
+         <a href="{% url 'produto:produto_delete' object.pk %}">
+             <button type="button" class="btn btn-success">
+                 <span class="fa fa-pencil"></span>Deletar
+             </button>
+         </a>
+     </span>
+   </h1>
+
+   <div class="col-sm-6">
+       <table class="table table-user-information">
+           <tbody>
+           <tr>
+               <th class="text-right"> Preço </th>
+               <td>R$ {{ object.preco }}</td>
+           </tr>
+           <tr>
+               <th class="text-right"> Estoque </th>
+               <td> {{ object.estoque }}</td>
+           </tr>
+           <tr>
+               <th class="text-right"> Estoque Minimo </th>
+               <td> {{ object.estoque_minimo }}</td>
+           </tr>
+           <tr>
+               <th class="text-right"> Data </th>
+               <td> {{ object.data }}</td>
+           </tr>
+           </tbody>
+       </table>
+   </div>
+ {% endif %}
+ {% endblock content %}

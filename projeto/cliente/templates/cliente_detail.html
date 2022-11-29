@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+ {% block content %}
+{% if user.is_authenticated %}
+
+
+   <h1>{{ object }}
+     <span class="pull-right">
+         <a href="{% url 'cliente:cliente_list' %}">
+                <button type="button" class="btn btn-primary">
+                  voltar
+                </button>
+            </a>
+         <a href="{% url 'cliente:cliente_edit' object.pk %}">
+             <button type="button" class="btn btn-success">
+                 <span class="fa fa-pencil"></span>Editar
+             </button>
+         </a>
+         <a href="{% url 'cliente:cliente_delete' object.pk %}">
+             <button type="button" class="btn btn-success">
+                 <span class="fa fa-pencil"></span>Deletar
+             </button>
+         </a>
+     </span>
+   </h1>
+
+   <div class="col-sm-6">
+       <table class="table table-user-information">
+           <tbody>
+           <tr>
+               <th class="text-right"> Telefone </th>
+               <td>R$ {{ object.telefone }}</td>
+           </tr>
+           <tr>
+               <th class="text-right"> Cep </th>
+               <td> {{ object.cep }}</td>
+           </tr>
+           <tr>
+               <th class="text-right"> Rua </th>
+               <td> {{ object.rua }}</td>
+           </tr>
+           <tr>
+               <th class="text-right"> Numero </th>
+               <td> {{ object.numero }}</td>
+           </tr>
+           <tr>
+               <th class="text-right"> Data </th>
+               <td> {{ object.data_cliente }}</td>
+           </tr>
+           </tbody>
+       </table>
+   </div>
+ {% endif %}
+ {% endblock content %}
