@@ -2,9 +2,9 @@
 
 {% block content %}
 <div class="page-header">
-{% if user.is_authenticated %}
+    {% if user.is_authenticated %}
     <h2>Estoque Saida
-        <span class="float-right">
+        <span class="float-center">
             <a href="{% url 'saida:estoque_saida_add' %}">
                 <button type="button" class="btn btn-primary">
                  <span class="fa fa-plus"></span> Adicionar
@@ -18,24 +18,32 @@
         <tr>
             <th>Item</th>
             <th>NF</th>
-            <th>Data</th>
+            <th>Ações</th>
+
+
         </tr>
         </thead>
         <tbody>
-         {% for object in object_list %}
-         <tr>
-             <td>
-                 <a href="{% url 'saida:estoque_saida_detail' object.pk %}">{{ object }}</a>
-             </td>
-             <td>{{ object.nf_formated }}</td>
-             <td>{{ object.created }}</td>
-         </tr>
+        {% for object in object_list %}
+        <tr>
+            <td><a href="{% url 'saida:estoque_saida_detail' object.pk %}">{{ object }}</a></td>
+            <td>{{ object.nf_formated }}</td>
+            <td>
+                <a href="{% url 'saida:estoque_saida_detail' object.pk %}" class="edit">
+                    <i class="material-icons" data-toggle="tooltip" title="Editar">summarize</i>
+                </a>
+                <a href="{% url 'saida:estoque_saida_delete' object.pk %}">
+                    <span class="material-icons">delete</span>
+                </a>
+            </td>
+        </tr>
         {% endfor %}
 
         </tbody>
     </table>
     {% endif %}
     {% else %}
+    <br> <br> <br>
     <p class="alert alert-warning">Sem itens na lista </p>
     {% endif %}
 </div>

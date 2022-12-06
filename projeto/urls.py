@@ -27,5 +27,6 @@ urlpatterns = [
     path('cliente/', include('projeto.cliente.urls')),
     path('entrada/', include('projeto.entrada.urls')),
     path('saida/', include('projeto.saida.urls')),
+    path('relatorio/', include('projeto.relatorio.urls')),
 
 ]

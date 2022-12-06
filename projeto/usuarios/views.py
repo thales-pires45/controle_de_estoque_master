@@ -7,8 +7,9 @@ from django.shortcuts import render, redirect
 def login(request):
     if request.user.is_authenticated:
         return redirect('/core/home/')
-    status = request.GET.get('status')
-    return render(request, 'login.html', {'status': status})
+    else:
+        status = request.GET.get('status')
+        return render(request, 'login.html', {'status': status})
 
 
 def cadastro(request):

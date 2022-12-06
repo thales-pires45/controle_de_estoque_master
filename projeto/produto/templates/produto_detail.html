@@ -1,49 +1,82 @@
 {% extends "base.html" %}
 
- {% block content %}
+{% block content %}
 {% if user.is_authenticated %}
+<div class="page-header">
+    <div id="relatorio_itens">
+        <h1>{{ object }}</h1>
 
-   <h1>{{ object }}
-     <span class="pull-right">
-         <a href="{% url 'produto:produto_list' %}">
-                <button type="button" class="btn btn-primary">
-                  voltar
-                </button>
-         </a>
-         <a href="{% url 'produto:produto_edit' object.pk %}">
-             <button type="button" class="btn btn-success">
-                 <span class="fa fa-pencil"></span>Editar
-             </button>
-         </a>
-         <a href="{% url 'produto:produto_delete' object.pk %}">
-             <button type="button" class="btn btn-success">
-                 <span class="fa fa-pencil"></span>Deletar
-             </button>
-         </a>
-     </span>
-   </h1>
+        <table class="table table-user-information">
+            <tbody>
+            <tr>
+                <th class="text-right"> Preço</th>
+                <td>R$ {{ object.preco }}</td>
+            </tr>
+            <tr>
+                <th class="text-right"> Estoque</th>
+                <td> {{ object.estoque }}</td>
+            </tr>
+            <tr>
+                <th class="text-right"> Estoque Minimo</th>
+                <td> {{ object.estoque_minimo }}</td>
+            </tr>
+            <tr>
+                <th class="text-right"> Data</th>
+                <td> {{ object.data }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="buttons m-auto">
+        <div class="container-login100-form-btn">
+            <button class="btn btn-primary" value="Save" onclick="printDiv()">
+                Gerar relatório
+            </button>
+            <span class="float-right">
+                <a href="{% url 'produto:produto_list' %}">
+                    <button type="button" class="btn btn-primary">
+                        voltar
+                    </button>
+                </a>
+                <a href="{% url 'produto:produto_edit' object.pk %}">
+                    <button type="button" class="btn btn-success">
+                        Editar
+                    </button>
+                </a>
+                <a href="{% url 'produto:produto_delete' object.pk %}">
+                    <button type="button" class="btn btn-success">
+                        Deletar
+                    </button>
+                </a>
+            </span>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock content %}
+{% block js %}
+<script>
+    function printDiv() {
+        var divContents = document.getElementById("relatorio_itens").innerHTML;
+        var a = window.open('', '', 'height=600px, width=1000px');
+        a.document.write('<html>');
+        a.document.write('<head>');
+        a.document.write('<link rel="stylesheet" href="../static/css/listas/listas.css">');
+        a.document.write('<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">');
+        a.document.write('<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"><' + '/script>');
+        a.document.write('</head>');
+        a.document.write('<body style="text-align:center;"');
+        a.document.write(divContents);
+        a.document.write('</body>');
+        a.document.write('</html>');
+        a.document.close();
 
-   <div class="col-sm-6">
-       <table class="table table-user-information">
-           <tbody>
-           <tr>
-               <th class="text-right"> Preço </th>
-               <td>R$ {{ object.preco }}</td>
-           </tr>
-           <tr>
-               <th class="text-right"> Estoque </th>
-               <td> {{ object.estoque }}</td>
-           </tr>
-           <tr>
-               <th class="text-right"> Estoque Minimo </th>
-               <td> {{ object.estoque_minimo }}</td>
-           </tr>
-           <tr>
-               <th class="text-right"> Data </th>
-               <td> {{ object.data }}</td>
-           </tr>
-           </tbody>
-       </table>
-   </div>
- {% endif %}
- {% endblock content %}
+        setTimeout(function () { a.print(); }, 1000);
+    }
+
+
+
+
+
+</script>
+{% endblock js %}

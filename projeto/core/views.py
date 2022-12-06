@@ -8,7 +8,7 @@ from .forms import FormTeste
 def index(request):
     if request.method == 'GET':
         form = FormTeste()
-        return render(request, 'index.html', {'form': form})
+        return render(request, 'home.html', {'form': form})
     else:
 
         form = FormTeste(request.POST)

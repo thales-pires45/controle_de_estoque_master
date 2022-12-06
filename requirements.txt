@@ -8,15 +8,12 @@ defusedxml==0.7.1
 Django==3.2.9
 django-allauth==0.51.0
 django-bootstrap-form==3.4
-django-cpf==0.1.0
-django-cpf-cnpj==1.0.0
 django-crispy-forms==1.13.0
 django-extensions==3.1.5
 django-template-repl==0.3.0
 django-widget-tweaks==1.4.9
 ecdsa==0.18.0
 idna==3.4
-numpy==1.23.5
 oauthlib==3.2.2
 pandas==1.5.1
 pyasn1==0.4.8

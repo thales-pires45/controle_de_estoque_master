@@ -4,34 +4,35 @@
 
 {% block content %}
 {% if user.is_authenticated %}
-<form method="POST" novalidate>
-    {% csrf_token %}
-    {% for field in form.visible_fields %}
-    <div class="form-group{% if field.errors %} has-error
-    {% endif %}">
-        <label for="{{ field.id_for_label }}">
-            {% if field.field.required %}
-            <span class="required">{{ field.label }} </span>
-            {% else %}
-            {{ field.label }}
-            {% endif %}
-        </label>
-        {% render_field field class="form-control" %}
-        {% for error in field.errors %}
-        <span class="text-muted">{{ error }}</span>
+ <div class="container-fluid text-center">
+     <br> <br>
+    <form class="form-floating" method="POST" novalidate>
+        {% csrf_token %}
+        {% for field in form.visible_fields %}
+        <div class="form-floating mb-3">
+            <div class="form-group{% if field.errors %} has-error
+            {% endif %}">
+                <label for="exampleFormControlInput1" class="form-label">
+                    {% if field.field.required %}
+                    <span class="required">{{ field.label }} </span>
+                    {% else %}
+                    {{ field.label }}
+                    {% endif %}
+                </label>
+                {% render_field field class="form-control" %}
+                {% for error in field.errors %}
+                <span class="text-muted">{{ error }}</span>
+                {% endfor %}
+            </div>
+        </div>
         {% endfor %}
-    </div>
-    {% endfor %}
-    <button type="submit" class="btn btn-success">Cadastrar</button>
-</form>
+        <button type="submit" class="btn btn-success">Cadastrar</button>
+        <a href="{% url 'produto:produto_list' %}">
+                <button type="button" class="btn btn-primary">
+                  voltar
+                </button>
+         </a>
+    </form>
+ </div>
 {% endif %}
 {% endblock content %}
-
-{% block js %}
-
-
-<!--#Teste-->
-<script src="{% static 'js/produto.js' %}"></script>
-
-
-{% endblock js %}

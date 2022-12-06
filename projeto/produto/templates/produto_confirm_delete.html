@@ -2,15 +2,8 @@
 
 {% block content %}
 <form method="post">{% csrf_token %}
-{% if user.is_authenticated %}
-
-
-
-<p>Tem certeza que deseja excluir esse produto? <h1>'{{ object }}'</h1></p>
-
-
-
-
+    {% if user.is_authenticated %}
+    <p>Tem certeza que deseja excluir esse produto?<h1>'{{ object }}'</h1></p>
     <a href="{% url 'produto:confirm_produto_delete' object.id %}" class="btn btn-info btn-lg">Excluir</a>
 </form>
 {% endif %}

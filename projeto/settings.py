@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'projeto.usuarios',
     'projeto.entrada',
     'projeto.saida',
+    'projeto.relatorio',
 
 ]
 
