@@ -1,5 +1,8 @@
 from django.db import models
 from django.urls import reverse_lazy
+from django.conf import settings
+
+User = settings.AUTH_USER_MODEL
 
 
 class Cliente(models.Model):
@@ -9,6 +12,7 @@ class Cliente(models.Model):
     rua = models.CharField('rua', max_length=100, blank=True)
     numero = models.IntegerField('numero', blank=True, null=True)
     data_cliente = models.DateField(auto_now_add=True)
+    user = models.ForeignKey(User, on_delete=models.PROTECT)
 
     class Meta:
         ordering = ('cliente',)

@@ -1,9 +1,13 @@
 from django.db import models
 from projeto.core.models import TimeStampedModel
 from projeto.produto.models import Produto
+from django.conf import settings
+
+User = settings.AUTH_USER_MODEL
 
 
 class Estoque_Entrada(TimeStampedModel):
+    user = models.ForeignKey(User, on_delete=models.PROTECT, blank=True)
     nf = models.PositiveIntegerField('nota fiscal', null=True, blank=True)
 
     class Meta:

@@ -15,8 +15,8 @@ class RelatorioProduto(ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        queryset = super(RelatorioProduto, self).get_queryset()
-        return queryset
+        self.object_list = Produto.objects.filter(user=self.request.user)
+        return self.object_list
 
 
 # Listar Cliente
@@ -26,8 +26,8 @@ class RelatorioCliente(ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        queryset = super(RelatorioCliente, self).get_queryset()
-        return queryset
+        self.object_list = Cliente.objects.filter(user=self.request.user)
+        return self.object_list
 
 
 # Listar Entrada
@@ -37,8 +37,8 @@ class RelatorioEntrada(ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        queryset = super(RelatorioEntrada, self).get_queryset()
-        return queryset
+        self.object_list = Estoque_Entrada.objects.filter(user=self.request.user)
+        return self.object_list
 
 
 # Listar Entrada
@@ -48,5 +48,5 @@ class RelatorioSaida(ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        queryset = super(RelatorioSaida, self).get_queryset()
-        return queryset
+        self.object_list = Estoque_Saida.objects.filter(user=self.request.user)
+        return self.object_list

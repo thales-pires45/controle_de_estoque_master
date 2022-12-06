@@ -10,19 +10,25 @@ from django.http import JsonResponse
 class listaProduto(LoginRequiredMixin, ListView):
     model = Produto
     template_name = 'produto_list.html'
-    context_object_name = 'produto_list'
+
     paginate_by = 10
 
     def get_queryset(self):
-        queryset = super(listaProduto, self).get_queryset()
-        return queryset
+        self.object_list = Produto.objects.filter(user=self.request.user)
+        return self.object_list
 
 
 # INSERIR
 class cadastroProduto(CreateView):
     model = Produto
+    fields = ['produto', 'preco', 'estoque', 'estoque_minimo']
     template_name = 'produto_form.html'
-    form_class = ProdutoForm
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        url = super().form_valid(form)
+
+        return url
 
 
 # EDITAR

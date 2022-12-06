@@ -1,21 +1,23 @@
 from django.shortcuts import render, resolve_url, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView, DeleteView
 from django.forms import inlineformset_factory
-from projeto.produto.models import Produto
 from django.http import HttpResponseRedirect
 from .models import Estoque_Itens_Saida, Estoque_Saida
 from .forms import Estoque_Itens_Saida_Form, EstoqueForm
 
 
 # Listar
+from ..produto.models import Produto
+
+
 class EstoqueSaidaList(ListView):
     model = Estoque_Saida
     template_name = 'estoque_saida_list.html'
     paginate_by = 10
 
     def get_queryset(self):
-        queryset = super(EstoqueSaidaList, self).get_queryset()
-        return queryset
+        self.object_list = Estoque_Saida.objects.filter(user=self.request.user)
+        return self.object_list
 
 
 # Update
@@ -55,6 +57,7 @@ def estoque_saida_add(request):
             prefix='estoque'
         )
         if form.is_valid() and formset.is_valid():
+            form.instance.user = request.user
             form = form.save(commit=False)
             form.save()
             formset.save()

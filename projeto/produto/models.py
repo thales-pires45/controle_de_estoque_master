@@ -1,8 +1,12 @@
 from django.db import models
 from django.urls import reverse_lazy
+from django.conf import settings
+
+User = settings.AUTH_USER_MODEL
 
 
 class Produto(models.Model):
+    user = models.ForeignKey(User, on_delete=models.PROTECT)
     produto = models.CharField(max_length=100, unique=True)
     preco = models.DecimalField('preço', max_digits=7, decimal_places=2)
     estoque = models.IntegerField('estoque atual')

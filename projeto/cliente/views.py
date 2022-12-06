@@ -9,20 +9,23 @@ from .forms import ClienteForm
 class listaCliente(LoginRequiredMixin, ListView):
     model = Cliente
     template_name = 'cliente_list.html'
-    context_object_name = 'cliente_list'
     paginate_by = 10
 
     def get_queryset(self):
-        queryset = super(listaCliente, self).get_queryset()
-        return queryset
+        self.object_list = Cliente.objects.filter(user=self.request.user)
+        return self.object_list
 
 
 # INSERIR
 class cadastroCliente(CreateView):
     model = Cliente
     template_name = 'cliente_form.html'
-    form_class = ClienteForm
+    fields = ['cliente', 'telefone', 'cep', 'rua', 'numero']
 
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        url = super().form_valid(form)
+        return url
 
 # EDITAR
 class editCliente(UpdateView):

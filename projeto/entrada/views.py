@@ -17,8 +17,8 @@ class EstoqueEntradaList(ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        queryset = super(EstoqueEntradaList, self).get_queryset()
-        return queryset
+        self.object_list = Estoque_Entrada.objects.filter(user=self.request.user)
+        return self.object_list
 
 
 # Update
@@ -50,6 +50,7 @@ def estoque_entrada_add(request):
         min_num=1,
         validate_min=True,
     )
+
     if request.method == 'POST':
         form = Estoque_Entrada_Form(request.POST, instance=estoque_form, prefix='main')
         formset = item_estoque_formset(
@@ -58,6 +59,7 @@ def estoque_entrada_add(request):
             prefix='estoque'
         )
         if form.is_valid() and formset.is_valid():
+            form.instance.user = request.user
             form = form.save(commit=False)
             form.save()
             formset.save()
@@ -68,6 +70,7 @@ def estoque_entrada_add(request):
         form = Estoque_Entrada_Form(instance=estoque_form, prefix='main')
         formset = item_estoque_formset(instance=estoque_form, prefix='estoque')
     context = {'form': form, 'formset': formset}
+
     return render(request, template_name, context)
 
 
