@@ -4,10 +4,10 @@ from django.forms import inlineformset_factory
 from django.http import HttpResponseRedirect
 from .models import Estoque_Itens_Saida, Estoque_Saida
 from .forms import Estoque_Itens_Saida_Form, EstoqueForm
+from ..produto.models import Produto
 
 
 # Listar
-from ..produto.models import Produto
 
 
 class EstoqueSaidaList(ListView):
@@ -39,6 +39,7 @@ def dar_baixa_estoque(form):
 
 def estoque_saida_add(request):
     template_name = 'estoque_saida_item_form.html'
+    user = request.user
     estoque_form = Estoque_Saida()
     item_estoque_formset = inlineformset_factory(
         Estoque_Saida,
@@ -50,11 +51,12 @@ def estoque_saida_add(request):
         validate_min=True,
     )
     if request.method == 'POST':
-        form = EstoqueForm(request.POST, instance=estoque_form, prefix='main')
+        form = EstoqueForm(user, request.POST, instance=estoque_form, prefix='main')
         formset = item_estoque_formset(
             request.POST,
             instance=estoque_form,
-            prefix='estoque'
+            prefix='estoque',
+            form_kwargs={'user': user}
         )
         if form.is_valid() and formset.is_valid():
             form.instance.user = request.user
@@ -65,8 +67,12 @@ def estoque_saida_add(request):
             url = 'saida:estoque_saida_detail'
             return HttpResponseRedirect(resolve_url(url, form.pk))
     else:
-        form = EstoqueForm(instance=estoque_form, prefix='main')
-        formset = item_estoque_formset(instance=estoque_form, prefix='estoque')
+        form = EstoqueForm(request.user, instance=estoque_form, prefix='main')
+        formset = item_estoque_formset(
+            instance=estoque_form,
+            prefix='estoque',
+            form_kwargs={'user': user}
+        )
     context = {'form': form, 'formset': formset}
     return render(request, template_name, context)
 

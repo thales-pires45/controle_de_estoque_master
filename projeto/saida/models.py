@@ -10,7 +10,7 @@ User = settings.AUTH_USER_MODEL
 class Estoque_Saida(TimeStampedModel):
     user = models.ForeignKey(User, on_delete=models.PROTECT, blank=True)
     nf = models.PositiveIntegerField('nota fiscal', null=True, blank=True)
-
+    cliente = models.ForeignKey(Cliente, on_delete=models.SET_NULL, null=True, blank=True)
     class Meta:
         ordering = ('-created',)
 
@@ -28,7 +28,6 @@ class Estoque_Saida(TimeStampedModel):
 class Estoque_Itens_Saida(models.Model):
     estoque = models.ForeignKey(Estoque_Saida, on_delete=models.CASCADE, related_name='estoques')
     produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
-    cliente = models.ForeignKey(Cliente, on_delete=models.SET_NULL, null=True, blank=True)
     quantidade = models.PositiveIntegerField()
     saldo = models.PositiveIntegerField(blank=True)
 

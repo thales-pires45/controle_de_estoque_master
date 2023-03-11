@@ -5,8 +5,6 @@ from projeto.produto.models import Produto
 from django.http import HttpResponseRedirect
 from .models import Estoque_Entrada, Estoque_Itens_Entrada
 from .forms import Estoque_Entrada_Form, Estoque_Itens_Entrada_Form
-
-# Listar
 from ..saida.models import Estoque_Saida
 
 
@@ -40,6 +38,7 @@ def dar_baixa_estoque(form):
 
 def estoque_entrada_add(request):
     template_name = 'estoque_entrada_item_form.html'
+    user = request.user
     estoque_form = Estoque_Entrada()
     item_estoque_formset = inlineformset_factory(
         Estoque_Entrada,
@@ -56,7 +55,8 @@ def estoque_entrada_add(request):
         formset = item_estoque_formset(
             request.POST,
             instance=estoque_form,
-            prefix='estoque'
+            prefix='estoque',
+            form_kwargs={'user': user}
         )
         if form.is_valid() and formset.is_valid():
             form.instance.user = request.user
@@ -68,7 +68,11 @@ def estoque_entrada_add(request):
             return HttpResponseRedirect(resolve_url(url, form.pk))
     else:
         form = Estoque_Entrada_Form(instance=estoque_form, prefix='main')
-        formset = item_estoque_formset(instance=estoque_form, prefix='estoque')
+        formset = item_estoque_formset(
+            instance=estoque_form,
+            prefix='estoque',
+            form_kwargs={'user': user}
+        )
     context = {'form': form, 'formset': formset}
 
     return render(request, template_name, context)
