@@ -1,8 +1,9 @@
+from django.conf import settings
 from django.db import models
+
 from projeto.cliente.models import Cliente
 from projeto.core.models import TimeStampedModel
 from projeto.produto.models import Produto
-from django.conf import settings
 
 User = settings.AUTH_USER_MODEL
 
@@ -11,6 +12,7 @@ class Estoque_Saida(TimeStampedModel):
     user = models.ForeignKey(User, on_delete=models.PROTECT, blank=True)
     nf = models.PositiveIntegerField('nota fiscal', null=True, blank=True)
     cliente = models.ForeignKey(Cliente, on_delete=models.SET_NULL, null=True, blank=True)
+
     class Meta:
         ordering = ('-created',)
 

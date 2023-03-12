@@ -1,14 +1,12 @@
 from django.views.generic import ListView
 
+from projeto.cliente.models import Cliente
 from projeto.entrada.models import Estoque_Entrada
 from projeto.produto.models import Produto
-from projeto.cliente.models import Cliente
-
-
-# Listar Produto
 from projeto.saida.models import Estoque_Saida
 
 
+# Listar Produto
 class RelatorioProduto(ListView):
     model = Produto
     template_name = 'relatorio_produto.html'

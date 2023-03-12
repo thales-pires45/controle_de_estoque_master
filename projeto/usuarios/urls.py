@@ -1,5 +1,6 @@
-from projeto.usuarios import views
 from django.urls import path
+
+from projeto.usuarios import views
 
 app_name = 'usuarios'
 

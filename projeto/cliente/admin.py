@@ -14,5 +14,3 @@ class ProdutoAdmin(admin.ModelAdmin):
         'data_cliente',
     )
     search_fields = ('cliente',)
-
-

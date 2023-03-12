@@ -1,9 +1,10 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import CreateView, UpdateView, ListView, DeleteView
-from .models import Produto
+
 from .forms import ProdutoForm
-from django.http import JsonResponse
+from .models import Produto
 
 
 # LISTAR

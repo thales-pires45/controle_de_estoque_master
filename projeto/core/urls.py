@@ -1,4 +1,5 @@
 from django.urls import path
+
 from projeto.core import views
 
 app_name = 'core'

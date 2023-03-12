@@ -1,7 +1,8 @@
+from django.conf import settings
 from django.db import models
+
 from projeto.core.models import TimeStampedModel
 from projeto.produto.models import Produto
-from django.conf import settings
 
 User = settings.AUTH_USER_MODEL
 

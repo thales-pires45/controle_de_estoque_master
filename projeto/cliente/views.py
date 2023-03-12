@@ -1,8 +1,9 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import CreateView, UpdateView, ListView, DeleteView
-from .models import Cliente
+
 from .forms import ClienteForm
+from .models import Cliente
 
 
 # LISTAR
@@ -26,6 +27,7 @@ class cadastroCliente(CreateView):
         form.instance.user = self.request.user
         url = super().form_valid(form)
         return url
+
 
 # EDITAR
 class editCliente(UpdateView):
@@ -52,4 +54,3 @@ def confirm_deletar_Cliente(request, pk):
     post = get_object_or_404(Cliente, pk=pk)
     post.delete()
     return redirect('cliente:cliente_list')
-

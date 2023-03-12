@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2? family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
+
+*{margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+.box {
+    background: #fff;
+    width: 1400px;
+    height: 800px;
+    position: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    margin: auto;
+}
+
+.box-radius {
+    border-radius: 100px;
+}
+
+a{
+    color: #000000;
+}
+
+body{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    min-height: 100vh;
+    background: #2d2d2d;
+}
+
+.navigation{
+    position: relative;
+    min-height: 100vh;
+    background: #424242;
+    width: 70px;
+    box-shadow: 15px 0 0 #099c22;
+    border-left: #424242;
+    overflow-x: hidden;
+    transition: 0.5s;
+}
+
+.navigation:hover{
+    width: 200px;
+}
+
+.navigation ul{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding-left: 5px;
+    padding-top: 40px;
+}
+
+.navigation ul li {
+    position: relative;
+    list-style: none;
+    width: 100%;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+}
+
+.navigation ul li .submenu {
+    position: relative;
+    list-style: none;
+    top: 0;
+    left: 10px;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    display: none;
+}
+
+.navigation ul li:hover .submenu {
+    display: block;
+    background: #099c22;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+}
+
+.navigation ul li .submenu a {
+    display: block;
+    color: #fff;
+    padding: 5px;
+}
+
+.navigation ul li a {
+    position: relative;
+    display: flex;
+    width: 100%;
+    text-decoration: none;
+    color: #fff;
+}
+
+.navigation ul li a .icon{
+    position: relative;
+    display: block;
+    min-width: 60px;
+    height: 60px;
+    text-align: center;
+    line-height: 70px;
+}
+
+.navigation ul li a .icon ion-icon{
+    position: relative;
+    font-size: 1.5rem;
+    z-index: 1;
+}
+
+.navigation ul li a .title{
+    position: relative;
+    display: block;
+    padding-left: 10px;
+    height: 60px;
+    line-height: 60px;
+    white-space: nowrap;
+}
+
+.navigation ul li:hover{
+    background: #099c22;
+}
+
+.zlogout {
+    margin-top: 100%;
+}
+
+

@@ -1,4 +1,5 @@
 from django.urls import path
+
 from projeto.produto import views as v
 
 app_name = 'produto'

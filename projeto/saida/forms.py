@@ -1,8 +1,9 @@
 from django import forms
-from .models import Estoque_Saida, Estoque_Itens_Saida
-from projeto.produto.models import Produto
-from ..cliente.models import Cliente
 from django.conf import settings
+
+from projeto.produto.models import Produto
+from .models import Estoque_Saida, Estoque_Itens_Saida
+from ..cliente.models import Cliente
 
 User = settings.AUTH_USER_MODEL
 

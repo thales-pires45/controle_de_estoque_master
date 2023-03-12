@@ -1,6 +1,6 @@
+from django.conf import settings
 from django.db import models
 from django.urls import reverse_lazy
-from django.conf import settings
 
 User = settings.AUTH_USER_MODEL
 

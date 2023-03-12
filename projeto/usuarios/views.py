@@ -1,7 +1,8 @@
-from django.contrib.messages import constants
 from django.contrib import messages, auth
-from .models import Users as User
+from django.contrib.messages import constants
 from django.shortcuts import render, redirect
+
+from .models import Users as User
 
 
 def login(request):

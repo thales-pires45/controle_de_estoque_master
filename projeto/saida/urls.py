@@ -1,4 +1,5 @@
-from django.urls import include, path
+from django.urls import path
+
 from projeto.saida import views
 
 app_name = 'saida'

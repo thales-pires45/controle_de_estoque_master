@@ -1,9 +1,10 @@
-from django.shortcuts import render, resolve_url, redirect, get_object_or_404
-from django.views.generic import ListView, DetailView, DeleteView
 from django.forms import inlineformset_factory
 from django.http import HttpResponseRedirect
-from .models import Estoque_Itens_Saida, Estoque_Saida
+from django.shortcuts import render, resolve_url, redirect, get_object_or_404
+from django.views.generic import ListView, DetailView, DeleteView
+
 from .forms import Estoque_Itens_Saida_Form, EstoqueForm
+from .models import Estoque_Itens_Saida, Estoque_Saida
 from ..produto.models import Produto
 
 

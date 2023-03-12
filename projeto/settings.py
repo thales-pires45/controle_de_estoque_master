@@ -14,7 +14,6 @@ from pathlib import Path
 import os
 from django.contrib.messages import constants
 
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -140,8 +139,9 @@ TIME_ZONE = 'America/Sao_Paulo'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '/assets/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'core/static')]
 
 LOGIN_URL = '/auth/login/'
 # LOGOUT_REDIRECT_URL = 'core:index'
