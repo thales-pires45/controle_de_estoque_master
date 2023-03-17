@@ -1,5 +1,12 @@
 @import url('https://fonts.googleapis.com/css2? family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
 
+.form-control {
+    margin: 10px;
+}
+.form-group {
+    margin: 10px;
+}
+
 *{margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -10,10 +17,10 @@
     background: #fff;
     width: 1400px;
     height: 800px;
-    position: 0;
-    left: 0;
-    right: 0;
-    top: 0;
+    position: 100vh;
+    left: 100vh;
+    right: 100vh;
+    top: 100vh;
     margin: auto;
 }
 
@@ -23,6 +30,15 @@
 
 a{
     color: #000000;
+}
+
+.row{
+    position: 100vh;
+    left: 100vh;
+    right: 100vh;
+    top: 100vh;
+    margin: auto;
+    display: flex;
 }
 
 body{
@@ -81,6 +97,7 @@ body{
     background: #099c22;
     border-top-left-radius: 25px;
     border-bottom-left-radius: 25px;
+    transition: 0.1s;
 }
 
 .navigation ul li .submenu a {
@@ -123,10 +140,12 @@ body{
 
 .navigation ul li:hover{
     background: #099c22;
+    transition: 0.1s;
 }
 
 .zlogout {
     margin-top: 100%;
 }
+
 
 

@@ -18,15 +18,15 @@ class listaCliente(LoginRequiredMixin, ListView):
 
 
 # INSERIR
-class cadastroCliente(CreateView):
+class cadastroCliente(LoginRequiredMixin, CreateView):
     model = Cliente
+    form_class = ClienteForm
     template_name = 'cliente_form.html'
-    fields = ['cliente', 'telefone', 'cep', 'rua', 'numero']
 
     def form_valid(self, form):
         form.instance.user = self.request.user
-        url = super().form_valid(form)
-        return url
+        response = super().form_valid(form)
+        return response
 
 
 # EDITAR

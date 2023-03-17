@@ -9,9 +9,10 @@
 <p class="alert alert-danger" role="alert"><span style="font-weight: bold">{{ message }}</span></p>
 {% endif %}
 {% endfor %}
-
+<br>
 <div class="page-header">
     {% if user.is_authenticated %}
+
     <h2>Lista de Clientes
         <span class="float-center">
             <a href="{% url 'cliente:cliente_add' %}">

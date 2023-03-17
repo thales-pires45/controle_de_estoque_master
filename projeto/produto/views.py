@@ -20,16 +20,16 @@ class listaProduto(LoginRequiredMixin, ListView):
 
 
 # INSERIR
-class cadastroProduto(CreateView):
+class cadastroProduto(LoginRequiredMixin, CreateView):
     model = Produto
-    fields = ['produto', 'preco', 'estoque', 'estoque_minimo']
+    form_class = ProdutoForm
     template_name = 'produto_form.html'
 
     def form_valid(self, form):
         form.instance.user = self.request.user
-        url = super().form_valid(form)
+        response = super().form_valid(form)
 
-        return url
+        return response
 
 
 # EDITAR
