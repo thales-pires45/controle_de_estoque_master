@@ -1,16 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
-
-
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
-<br>
 <div class="limiter">
     {% if user.is_authenticated %}
     <div id="relatorio_itens">
 
                     <span class="login100-form-title pb-3">
-                        <h2>Lista de Saidas Cadastrados</h2>
+                        <h3>Lista de Saidas Cadastrados</h3>
                     </span>
         {% if object_list %}
 

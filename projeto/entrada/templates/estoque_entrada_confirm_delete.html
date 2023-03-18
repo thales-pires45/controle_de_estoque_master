@@ -1,26 +1,15 @@
 {% extends "base.html" %}
-
 {% block content %}
 <form method="post">{% csrf_token %}
 {% if user.is_authenticated %}
-
-
-
-<p>Tem certeza que deseja excluir esse essa nota? <h1>'{{ object }}'</h1></p>
+    <p>Tem certeza que deseja excluir esse essa nota? <h1>'{{ object }}'</h1></p>
     <br>
     <p>Lembrando que depois de excluir, o estoque não sera atualizado (necessario refazer a contagem)</p>
-
-
-
-
-
     <a href="{% url 'entrada:confirm_estoque_entrada_delete' object.id %}" class="btn btn-info btn-lg">Excluir</a>
 </form>
 {% endif %}
  {% endblock content %}
-
 {% block js %}
-
  <script>
      //Close alert after 2 second
      window.setTimeout(function() {

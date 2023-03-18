@@ -1,8 +1,8 @@
 from django.contrib import messages, auth
+from django.contrib.auth import authenticate
+from django.contrib.auth.models import User
 from django.contrib.messages import constants
 from django.shortcuts import render, redirect
-
-from .models import Users as User
 
 
 def login(request):
@@ -21,12 +21,18 @@ def cadastro(request):
 
 
 def valida_cadastro(request):
-    nome = request.POST.get('nome')
+
+    nome = request.POST.get('username')
     email = request.POST.get('email')
-    senha = request.POST.get('senha')
+    senha = request.POST.get('password')
+    senha2 = request.POST.get('password2')
 
     if len(nome.strip()) == 0 or len(email.strip()) == 0:
-        messages.add_message(request, constants.ERROR, 'Email ou senha não podem ficar vazior')
+        messages.add_message(request, constants.ERROR, 'Email ou senha não podem ficar vazio')
+        return redirect('/auth/cadastro/')
+
+    if senha != senha2:
+        messages.add_message(request, constants.ERROR, 'Suas senhas não são as mesmas')
         return redirect('/auth/cadastro/')
 
     if len(senha) < 8:
@@ -47,7 +53,10 @@ def valida_cadastro(request):
         usuario.save()
 
         messages.add_message(request, constants.SUCCESS, 'Cadastro realizado com sucesso')
-        return redirect('/auth/login/')
+
+        user = authenticate(request, username=nome, password=senha)
+        auth.login(request, user)
+        return redirect('/core/home/')
 
     except:
         messages.add_message(request, constants.ERROR, 'Erro interno do sistema')
@@ -55,13 +64,12 @@ def valida_cadastro(request):
 
 
 def valida_login(request):
-    nome = request.POST.get('nome')
+    username_or_email = request.POST.get('username_or_email')
     senha = request.POST.get('senha')
 
-    usuario = auth.authenticate(username=nome, password=senha)
-    print(usuario)
+    usuario = authenticate(request, username=username_or_email, password=senha)
     if not usuario:
-        messages.add_message(request, constants.WARNING, 'Email ou senha inválido')
+        messages.add_message(request, constants.WARNING, 'usuário ou senha inválido')
         return redirect('/auth/login/')
     else:
         auth.login(request, usuario)

@@ -1,11 +1,9 @@
 {% extends "base.html" %}
-
 {% block content %}
 {% if user.is_authenticated %}
 <div class="limiter">
     <div id="relatorio_itens">
-        <h1>Saida: {{ object }}</h1>
-
+        <h3>Saida: {{ object }}</h3>
         <div class="col-sm-6">
             <table class="table table-user-information">
                 <tbody>
@@ -24,7 +22,6 @@
                 </tbody>
             </table>
         </div>
-
         <table class="table table-striped">
             <thead>
             <tr>

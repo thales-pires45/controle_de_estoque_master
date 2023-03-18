@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'widget_tweaks',
     'bootstrapform',
+    'compressor',
 
     # Minhas Apps
     'projeto.core',
@@ -141,7 +142,24 @@ TIME_ZONE = 'America/Sao_Paulo'
 
 STATIC_URL = '/assets/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'core/static')]
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'core/static'),
+]
+
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
+]
+
+COMPRESS_OFFLINE = True
+COMPRESS_ENABLED = True
+COMPRESS_FILTERS = {
+    'css': ['compressor.filters.css_default.CssAbsoluteFilter', 'compressor.filters.cssmin.CSSMinFilter'],
+    'js': ['compressor.filters.jsmin.JSMinFilter']
+}
+
+COMPRESS_OUTPUT_DIR = 'cache'
 
 LOGIN_URL = '/auth/login/'
 # LOGOUT_REDIRECT_URL = 'core:index'
@@ -160,5 +178,3 @@ MESSAGE_TAGS = {
     constants.INFO: 'alert-info',
     constants.WARNING: 'alert-warning',
 }
-
-AUTH_USER_MODEL = "usuarios.Users"

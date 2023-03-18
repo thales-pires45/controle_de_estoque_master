@@ -15,14 +15,14 @@ class ClienteForm(forms.ModelForm):
             'cep': forms.TextInput(attrs={'class': 'form-control'}),
         }
 
-    # def clean_telefone(self):
-    #     telefone = self.cleaned_data['telefone']
-    #     if not telefone.isnumeric():
-    #         raise forms.ValidationError('O telefone deve conter apenas números.')
-    #     return telefone
-    #
-    # def clean_cep(self):
-    #     telefone = self.cleaned_data['cep']
-    #     if not telefone.isnumeric():
-    #         raise forms.ValidationError('O cep deve conter apenas números.')
-    #     return telefone
+    def clean_telefone(self):
+        telefone = self.cleaned_data['telefone']
+        if not telefone.isnumeric():
+            raise forms.ValidationError('O telefone deve conter apenas números.')
+        return telefone
+
+    def clean_cep(self):
+        telefone = self.cleaned_data['cep']
+        if not telefone.isnumeric():
+            raise forms.ValidationError('O cep deve conter apenas números.')
+        return telefone

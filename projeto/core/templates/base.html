@@ -17,13 +17,16 @@
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <!--fon awesome-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
-    {% endblock link %}
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
     <link rel="shortcut icon" href="https://www.djangoproject.com/favicon.ico">
     <!--Select2-->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    {% endblock link %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% block css %}
+    {% endblock css %}
 </head>
 <body>
 <div class="navigation">
@@ -158,11 +161,13 @@
     </ul>
     {% endif %}
 </div>
-<div class="box box-radius">
-    <div class="container-fluid text-center">
-        {% block content %} {% endblock content %}
-    </div>
+<div class="background">
+    <div class="shape"></div>
+    <div class="shape"></div>
 </div>
+<form method="POST">
+    {% block content %} {% endblock content %}
+</form>
 
 
 <!-- Optional JavaScript -->

@@ -4,10 +4,9 @@
 {% load bootstrap %}
 {% block content %}
 {% if user.is_authenticated %}
-<br>
 <div class="row">
     <div class="cols">
-        <form method="POST" novalidate action="{% url 'cliente:cliente_add' %}">
+        <form method="POST" novalidate action="{% url 'produto:produto_add' %}">
             {% csrf_token %}
             {% if form.errors %}
             <div class="alert alert-danger">
@@ -19,14 +18,13 @@
                 {% endfor %}
             </div>
             {% endif %}
-            <legend style="border-bottom: 1px solid #e5e5e5;">Cadastro Produto</legend>
+            <h3 style="border-bottom: 1px solid #e5e5e5;">Cadastro Produto</h3>
             <br> <br>
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="{{ form.produto.id_for_label }}">Nome</label>
                     {{ form.produto|add_class:"form-control" }}
                 </div>
-
             </div>
             <div class="form-row">
                 <div class="form-group col-md-4">
@@ -45,8 +43,8 @@
                 </div>
             </div>
             <button type="submit" class="btn btn-success">Cadastrar</button>
-            <a href="{% url 'cliente:cliente_list' %}">
-                <button type="button" class="btn btn-primary">
+            <a href="{% url 'produto:produto_list' %}">
+                <button type="button" class="btn btn-primary" id="cancelar-btn">
                     Voltar
                 </button>
             </a>
@@ -55,4 +53,15 @@
 </div>
 {% endif %}
 {% endblock content %}
+
+{% block js %}
+<script>
+    $(document).ready(function() {
+        $('#cancelar-btn').click(function(ev) {
+            ev.preventDefault();
+            window.history.back();
+        });
+    });
+</script>
+{% endblock js %}
 
