@@ -2,7 +2,6 @@
 {% load static %}
 {% load widget_tweaks %}
 {% load bootstrap %}
-
 {% block css %}
 
 <style>
@@ -12,13 +11,13 @@
     .form-group {
     margin: 10px;
     }
-
 </style>
 
 {% endblock css %}
 
 {% block content %}
 {% if user.is_authenticated %}
+
 <div class="row">
     <div class="cols">
         <form method="POST" novalidate>
@@ -26,12 +25,12 @@
             <h3 style="border-bottom: 1px solid #e5e5e5;">Estoque Saida</h3>
 
             <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     {% for field in form.visible_fields %}
                     <div class="form-group{% if field.errors %} has-error {% endif %}">
                         <label for="{{ field.id_for_label }}">
                             {% if field.field.required %}
-                            <span class="required">{{ field.label }} </span>
+                            <span class="required"> {{ field.label }} </span>
                             {% else %}
                             {{ field.label }}
                             {% endif %}
@@ -45,39 +44,35 @@
                     {{ formset.management_form }}
                 </div>
             </div>
-            <div class="row">
-                <div class="col-sm-12">
-                    <legend style="border-bottom: 1px solid #e5e5e5;">Produtos</legend>
-                    <div id="estoque" class="form-inline">
-                        {% for item_estoque_form in formset %}
-                        <div id="item-{{ forloop.counter0 }}" class="form-group">
-                            {{ item_estoque_form|bootstrap }}
-                        </div>
-                        {% endfor %}
-                    </div>
+
+            <h3 style="border-bottom: 1px solid #e5e5e5;">Produtos</h3>
+
+            <div id="estoque" class="form-inline">
+                {% for item_estoque_form in formset %}
+                <div id="item-{{ forloop.counter0 }}" class="form-group">
+                    {{ item_estoque_form|bootstrap }}
                 </div>
+                {% endfor %}
             </div>
 
             <span id="add-item" class="btn btn-info" style="margin-top: 10px;">
-            <i class="fa fa-plus"></i>Adicionar
-        </span>
+                <i class="fa fa-plus"></i> Adicionar
+            </span>
             <div class="row float-right">
                 <div class="col-sm-12" style="margin-top: 10px;">
-                    <div class="form-inline buttons">
-                        <button class="btn btn-primary" value="Save">
-                            <i class="fa fa-floppy-o"></i>Salvar
-                        </button>
-
-                        <a href="{% url 'saida:estoque_saida_list' %}" class="btn btn-danger" id="cancelar-btn">
-                            <i class="fa fa-times"></i>
-                            Cancelar
-                        </a>
-                    </div>
+                    <button class="btn btn-primary" value="Save">
+                        <i class="fa fa-floppy-o"></i> Salvar
+                    </button>
+                    <a href="{% url 'saida:estoque_saida_list' %}" class="btn btn-success" id="cancelar-btn">
+                        <i class="fa fa-times"></i>
+                        Cancelar
+                    </a>
                 </div>
             </div>
         </form>
     </div>
 </div>
+
 {% endif %}
 {% endblock content %}
 
@@ -89,19 +84,22 @@
             window.history.back();
         });
     });
+
 </script>
 <script>
-     $(document).ready(function() {
+    $(document).ready(function() {
 
     //insere classe no primeiro item do produto
     $('#id_estoque-0-produto').addClass('clProduto');
     $('#id_estoque-0-quantidade').addClass('clQuantidade');
-     //Desabilita o primeiro campo saldo
-   // $('#id_estoque-0-saldo').prop('type', 'hidden')
+    //Desabilita o primeiro campo saldo
+    //$('#id_estoque-0-saldo').prop('type', 'hidden')
     //Cria um spam para mostrar saldo na tela
     $('label[for="id_estoque-0-saldo"]').append('<span id="id_estoque-0-saldo-span" class="lead" style="padding-left: 10px;"></span>')
     //Cria um spam para mostrar saldo na tela
     $('label[for="id_estoque-0-saldo"]').append('<input id="id_estoque-0-inicial" class="form-control" type="hidden"/>')
+
+
 
 
      $('#add-item').click(function(ev){
@@ -181,6 +179,8 @@
         //Atribui o saldo ao campo 'id_estoque-x-saldo-span'
         $('#'+campo2).text(saldo)
     });
+
+
 </script>
 
 <script type="text/html" id="item-estoque">

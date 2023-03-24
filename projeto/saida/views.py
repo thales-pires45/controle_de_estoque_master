@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, resolve_url, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView, DeleteView
 
-from .forms import Estoque_Itens_Saida_Form, EstoqueForm
+from .forms import Estoque_Itens_Saida_Form, Estoque_Saida_Form
 from .models import Estoque_Itens_Saida, Estoque_Saida
 from ..produto.models import Produto
 
@@ -51,8 +51,9 @@ def estoque_saida_add(request):
         min_num=1,
         validate_min=True,
     )
+
     if request.method == 'POST':
-        form = EstoqueForm(user, request.POST, instance=estoque_form, prefix='main')
+        form = Estoque_Saida_Form(user, request.POST, instance=estoque_form, prefix='main')
         formset = item_estoque_formset(
             request.POST,
             instance=estoque_form,
@@ -68,7 +69,7 @@ def estoque_saida_add(request):
             url = 'saida:estoque_saida_detail'
             return HttpResponseRedirect(resolve_url(url, form.pk))
     else:
-        form = EstoqueForm(request.user, instance=estoque_form, prefix='main')
+        form = Estoque_Saida_Form(request.user, instance=estoque_form, prefix='main')
         formset = item_estoque_formset(
             instance=estoque_form,
             prefix='estoque',
@@ -82,7 +83,7 @@ def estoque_saida_add(request):
 class deletarSaida(DeleteView):
     model = Estoque_Saida
     template_name = 'estoque_saida_confirm_delete.html'
-    form_class = EstoqueForm
+    form_class = Estoque_Saida_Form
 
 
 def confirm_deletar_Saida(request, pk):

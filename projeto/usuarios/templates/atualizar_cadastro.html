@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% load bootstrap %}
+{% block content %}
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-success" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+<div class="row">
+    <div class="cols">
+        <h3 style="border-bottom: 1px solid #e5e5e5;">Detalhes do Usuário</h3>
+        <br><br>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label>Nome de usuário: {{ user.username }}</label>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label>Email: {{ user.email }}</label>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label>Data de cadastro: {{ user.date_joined }}</label>
+            </div>
+        </div>
+
+        <h3 style="border-bottom: 1px solid #e5e5e5;">Atualizar Informações de Cadastro</h3>
+        <br><br>
+        <form method="post" action="{% url 'usuarios:atualizar_cadastro' %}">
+            {% csrf_token %}
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="username">Nome de usuário:</label>
+                    <input type="text" name="username" value="{{ user.username }}">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="email">Email:</label>
+                    <input type="email" name="email" value="{{ user.email }}">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success">Atualizar cadastro</button>
+            <a href="{% url 'usuarios:password_reset' %}" class="btn btn-success" >
+                Alterar Senha
+            </a>
+        </form>
+
+
+        <!--        <form method="post" action="{% url 'usuarios:password_reset' %}">-->
+        <!--            {% csrf_token %}-->
+        <!--            <div class="form-row">-->
+        <!--                <div class="form-group col-md-4">-->
+        <!--                    <label for="email">Email:</label>-->
+        <!--                    <input type="email" name="email">-->
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--            <button type="submit" class="btn btn-success">Redefinir senha</button>-->
+        <!--        </form>-->
+    </div>
+</div>
+{% endblock %}

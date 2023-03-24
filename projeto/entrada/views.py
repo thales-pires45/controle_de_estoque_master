@@ -1,14 +1,15 @@
 from django.forms import inlineformset_factory
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, resolve_url, redirect, get_object_or_404
+from django.shortcuts import resolve_url, redirect, get_object_or_404, render
 from django.views.generic import ListView, DetailView, DeleteView
 
-from projeto.produto.models import Produto
 from .forms import Estoque_Entrada_Form, Estoque_Itens_Entrada_Form
 from .models import Estoque_Entrada, Estoque_Itens_Entrada
 
-
 # Listar
+from ..produto.models import Produto
+
+
 class EstoqueEntradaList(ListView):
     model = Estoque_Entrada
     template_name = 'estoque_entrada_list.html'

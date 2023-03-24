@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+{% if messages %}
+{% for message in messages %}
+<div class="row">
+    <div class="cols">
+        <div class="alert alert-success" role="alert">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+        <h2>Esqueci Minha Senha</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="email">Email:</label>
+                    <input type="email" class="form-control" id="email" name="email">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

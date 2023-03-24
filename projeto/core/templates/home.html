@@ -3,7 +3,13 @@
 {% block content %}
 
 
-
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-success" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
   <div class="container">
     <h1>Bem-vindo {{user.username}}!</h1>
     <p>Este é um sistema para controle de estoque desenvolvido pelo Instituto Federal de Santa Catarina Canoinhas.</p>
