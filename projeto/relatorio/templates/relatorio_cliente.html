@@ -1,6 +1,53 @@
 {% extends "base.html" %}
 {% csrf_token %}
-{% block content %}
+{% block css %}
+<style>
+.form{
+    width: 1260px;
+    min-height: 800px;
+    height: auto;
+    transform: translate(-50%,-50%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.1);
+    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+    padding: 50px 35px;
+}
+
+.form *{
+    font-family: 'Poppins',sans-serif;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+    outline: none;
+    border: none;
+}
+
+.form h3{
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 42px;
+    text-align: center;
+}
+
+.row{
+    position: 100vh;
+    left: 100vh;
+    right: 100vh;
+    top: 100vh;
+    margin: auto;
+    display: flex;
+}
+
+.form input{
+    color: #000000;
+}
+</style>
+{% endblock css %}
+
+{% block relatorio %}
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <div class="limiter">
     {% if user.is_authenticated %}
@@ -50,8 +97,7 @@
         </div>
     </div>
 </div>
-
-{% endblock %}
+{% endblock relatorio %}
 {% block js %}
 <script>
     function printDiv() {

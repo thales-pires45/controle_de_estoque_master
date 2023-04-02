@@ -11,6 +11,9 @@
     .form-group {
     margin: 10px;
     }
+    option {
+        color: #000000;
+    }
 </style>
 {% endblock css %}
 
@@ -83,9 +86,6 @@
             window.history.back();
         });
     });
-
-
-
 </script>
 <script>
     $(document).ready(function() {
@@ -99,8 +99,6 @@
     $('label[for="id_estoque-0-saldo"]').append('<span id="id_estoque-0-saldo-span" class="lead" style="padding-left: 10px;"></span>')
     //Cria um spam para mostrar saldo na tela
     $('label[for="id_estoque-0-saldo"]').append('<input id="id_estoque-0-inicial" class="form-control" type="hidden"/>')
-    //Select2
-    $('.clProduto').select2()
 
 
      $('#add-item').click(function(ev){

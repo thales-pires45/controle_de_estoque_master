@@ -7,8 +7,8 @@ User = settings.AUTH_USER_MODEL
 
 class Cliente(models.Model):
     cliente = models.CharField(max_length=100, unique=True)
-    telefone = models.CharField(max_length=24)
-    cep = models.CharField('cep', max_length=8, blank=True)
+    telefone = models.CharField(max_length=16)
+    cep = models.CharField('cep', max_length=9, blank=True)
     rua = models.CharField('rua', max_length=100, blank=True)
     numero = models.IntegerField('numero', blank=True, null=True)
     data_cliente = models.DateField(auto_now_add=True)

@@ -25,9 +25,9 @@
                     <label for="{{ form.cliente.id_for_label }}">Nome</label>
                     {{ form.cliente|add_class:"form-control" }}
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                     <label for="{{ form.telefone.id_for_label }}">Telefone</label>
-                    {{ form.telefone|add_class:"form-control" }}
+                    {% render_field form.telefone type="tel" class="form-control" %}
                 </div>
             </div>
             <div class="form-row">
@@ -64,5 +64,63 @@
             window.history.back();
         });
     });
+
 </script>
+<script>
+// seleciona todos os elementos com atributo data-mask
+$('[data-mask]').each(function() {
+  var mask = $(this).attr('data-mask'); // obtém o valor do atributo data-mask
+  $(this).on('input', function() { // escuta o evento input
+    var value = $(this).val().replace(/\D/g, ''); // remove caracteres não numéricos
+    var maskedValue = '';
+    var index = 0;
+    // itera sobre a máscara e adiciona os caracteres correspondentes
+    for (var i = 0; i < mask.length && index < value.length; i++) {
+      if (mask.charAt(i) === 'X') {
+        maskedValue += value.charAt(index);
+        index++;
+      } else {
+        maskedValue += mask.charAt(i);
+      }
+    }
+    $(this).val(maskedValue); // define o valor do campo com a máscara aplicada
+  });
+});
+
+// exemplo de uso para o campo de cep com máscara XXXXX-XXX
+$(document).ready(function() {
+  var cepInput = $('#id_cep');
+  cepInput.on('input', function() {
+    var value = $(this).val().replace(/\D/g, '');
+    var maskedValue = '';
+    for (var i = 0; i < value.length && i < 8; i++) {
+      if (i === 5) {
+        maskedValue += '-';
+      }
+      maskedValue += value.charAt(i);
+    }
+    $(this).val(maskedValue);
+  });
+});
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $('[data-mask]').each(function() {
+      $(this).mask($(this).attr('data-mask'), { reverse: $(this).data('mask-reverse') || false });
+    });
+    $('#id_telefone').on('input', function() {
+      var tel = $(this).val().replace(/\D/g, '');
+      if (tel.length === 11) { // formatação com DDD
+        $(this).val('(' + tel.substr(0, 2) + ') ' + tel.substr(2, 1) + ' ' + tel.substr(3, 4) + '-' + tel.substr(7, 4));
+      } else if (tel.length === 10) { // formatação sem DDD
+        $(this).val('(' + tel.substr(0, 2) + ') ' + tel.substr(2, 4) + '-' + tel.substr(6, 4));
+      }
+    });
+  });
+</script>
+
+
 {% endblock js %}
