@@ -14,6 +14,7 @@ from pathlib import Path
 import os
 from django.contrib.messages import constants
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -118,12 +119,20 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 AUTHENTICATION_BACKENDS = (
-    'social_core.backends.auth0.Auth0OAuth2',
-    'social_core.backends.github.GithubOAuth2',
-    'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
+    'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.facebook.FacebookOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
 )
 
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '270508574207-umusjms52fv23oesdgli6m2sordfruv7.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+
+# SOCIAL_AUTH_FACEBOOK_KEY = '629555192392661'
+# SOCIAL_AUTH_FACEBOOK_SECRET = '6df4e0fdd15027f2844ba3b0cc6cb371'
+# SOCIAL_AUTH_FACEBOOK_REDIRECT_URI = 'http://127.0.0.1:8000/auth/complete/facebook/'
+
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = 'http://127.0.0.1:8000/core/home/'
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
@@ -162,7 +171,7 @@ COMPRESS_FILTERS = {
 COMPRESS_OUTPUT_DIR = 'cache'
 
 LOGIN_URL = '/auth/login/'
-# LOGOUT_REDIRECT_URL = 'core:index'
+LOGOUT_REDIRECT_URL = 'core:index'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -178,11 +187,4 @@ MESSAGE_TAGS = {
     constants.INFO: 'alert-info',
     constants.WARNING: 'alert-warning',
 }
-
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_USE_TLS = True
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'thales.vp@aluno.ifsc.edu.br'
-EMAIL_HOST_PASSWORD = 'Jogos2024'
 

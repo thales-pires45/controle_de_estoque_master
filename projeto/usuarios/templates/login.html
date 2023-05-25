@@ -39,10 +39,9 @@
     <input type="password" placeholder="Senha" id="password" name="senha">
     <a href="{% url 'usuarios:esqueceu_senha_login' %}">esqueci a senha</a>
     <button type="submit">Iniciar Sessão</button>
-    <!--        <input type="button" value="">-->
+<!--    <input type="button" value="">-->
     <div class="social">
-        <div class="go"><i class="fab fa-google"></i> Google</div>
-        <div class="fb"><i class="fab fa-facebook"></i> Facebook</div>
+        <div class="go"><a href="{% url "social:begin" "google-oauth2" %}"><i class="fab fa-google"></i>Google</a></div>
     </div>
     <a href="{% url 'usuarios:cadastro' %}">Criar Conta</a>
 

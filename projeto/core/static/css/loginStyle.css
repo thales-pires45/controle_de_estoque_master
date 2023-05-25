@@ -1,4 +1,4 @@
-      *,
+    *,
 *:before,
 
 *:after{
@@ -100,7 +100,7 @@ input{
 }
 
 button{
-    margin-top: 50px;
+    margin-top: 30px;
     width: 100%;
     background-color: #ffffff;
     color: #080710;
@@ -111,14 +111,14 @@ button{
     cursor: pointer;
 }
 .social{
-  margin-top: 30px;
+  margin-top: 15px;
   display: flex;
 }
 
 .social div{
   background: red;
-  width: 150px;
-  border-radius: 3px;
+  width: 100%;
+  border-radius: 5px;
   padding: 5px 10px 10px 5px;
   background-color: rgba(255,255,255,0.27);
   color: #eaf0fb;
@@ -129,7 +129,7 @@ button{
   background-color: rgba(255,255,255,0.47);
 }
 
-.social .fb{
+.social .g{
   margin-left: 25px;
 }
 
