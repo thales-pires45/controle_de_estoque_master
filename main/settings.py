@@ -140,21 +140,12 @@ SOCIAL_AUTH_LOGIN_REDIRECT_URL = 'http://127.0.0.1:8000/core/home/'
 LANGUAGE_CODE = 'pt-br'
 
 TIME_ZONE = 'America/Sao_Paulo'
-#
-# USE_I18N = True
-#
-# USE_L10N = True
-#
-# USE_TZ = True
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.2/howto/static-files/
+USE_I18N = True
 
-# STATIC_URL = '/assets/'
-# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, '../core/static'),
-# ]
+USE_L10N = True
+
+USE_TZ = True
 
 STATIC_URL = '/static/'
 

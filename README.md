@@ -6,3 +6,4 @@
 <p>5 - Instale os requerimentos - pip install -r requirements.txt</p>
 <p>7 - Realize as migrações - python manage.py migrate</p>
 <p>8 - Rode a aplicação na porta 8000 - python manage.py runserver 8000</p>
+
