@@ -1,6 +1,7 @@
+import datetime
+
 from django.conf import settings
 from django.db import models
-
 from core.models import TimeStampedModel
 from produto.models import Produto
 
@@ -30,6 +31,8 @@ class Estoque_Itens_Entrada(models.Model):
     produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
     quantidade = models.PositiveIntegerField()
     saldo = models.PositiveIntegerField(blank=True)
+    valor_total = models.DecimalField(max_digits=10, decimal_places=2)
+    data = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         ordering = ('pk',)

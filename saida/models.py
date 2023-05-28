@@ -1,9 +1,9 @@
 from django.conf import settings
 from django.db import models
+
 from cliente.models import Cliente
 from core.models import TimeStampedModel
 from produto.models import Produto
-import datetime
 
 User = settings.AUTH_USER_MODEL
 
@@ -32,8 +32,8 @@ class Estoque_Itens_Saida(models.Model):
     produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
     quantidade = models.PositiveIntegerField()
     saldo = models.PositiveIntegerField(blank=True)
-    valor_total = models.FloatField()
-    data = models.DateTimeField(default=datetime.datetime.now())
+    valor_total = models.DecimalField(max_digits=10, decimal_places=2)
+    data = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         ordering = ('pk',)
