@@ -1,4 +1,7 @@
 {% extends "base.html" %}
+{% block title %}
+<title>Cadastro de Saída</title>
+{% endblock title %}
 {% load static %}
 {% load widget_tweaks %}
 {% load bootstrap %}
@@ -97,10 +100,19 @@
         $('#id_estoque-0-quantidade').addClass('clQuantidade');
         //Desabilita o primeiro campo saldo
         $('#id_estoque-0-saldo').prop('type', 'hidden')
+
+        $('#id_estoque-0-valor_total').prop('type', 'hidden')
+
         //Cria um spam para mostrar saldo na tela
         $('label[for="id_estoque-0-saldo"]').append('<span id="id_estoque-0-saldo-span" class="lead" style="padding-left: 10px;"></span>')
+
+        $('label[for="id_estoque-0-valor_total"]').append('<span id="id_estoque-0-valor_total-span" class="lead" style="padding-left: 10px;"></span>')
+
         //Cria um spam para mostrar saldo na tela
         $('label[for="id_estoque-0-saldo"]').append('<input id="id_estoque-0-inicial" class="form-control" type="hidden"/>')
+
+        $('label[for="id_estoque-0-valor_total"]').append('<input id="id_estoque-0-inicial" class="form-control" type="hidden"/>')
+
         $('#add-item').click(function(ev){
            ev.preventDefault();
            var count = $('#estoque').children().length;
@@ -114,6 +126,8 @@
            //Desabilita o campo saldo
            $('#id_estoque-'+ (count) +'-saldo').prop('type', 'hidden')
 
+           $('#id_estoque-'+ (count) +'-valor_total').prop('type', 'hidden')
+
            //some animate to scroll to view our new form
             $('html, body').animate({scrollTop:
             $("#add-item").position().top - 200}, 800);
@@ -122,16 +136,24 @@
 
             //Cria um spam para mostrar saldo na tela
             $('label[for="id_estoque-' + (count) + '-saldo"]').append('<span id="id_estoque-' + (count) + '-saldo-span" class="lead" style="padding-left: 10px;"></span>')
+            $('label[for="id_estoque-' + (count) + '-valor_total"]').append('<span id="id_estoque-' + (count) + '-valor_total-span" class="lead" style="padding-left: 10px;"></span>')
             //Cria um spam para mostrar saldo na tela
             $('label[for="id_estoque-' + (count) + '-saldo"]').append('<input id="id_estoque-' + (count) + '-inicial" class="form-control" type="hidden"/>')
+            $('label[for="id_estoque-' + (count) + '-valor_total"]').append('<input id="id_estoque-' + (count) + '-inicial" class="form-control" type="hidden"/>')
         });
     });
 
     let estoque
-    let saldo
-    let campo
-    let campo2
+    let saldos
+    let campoSaldo
+    let campoPreco
+    let campoSaldo2
+    let campoPreco2
     let quantidade
+    let precoCampo
+    let precos
+    let valorTotal
+
 
     $(document).on('change', '.clProduto', function() {
         let self = $(this)
@@ -143,12 +165,21 @@
         type: 'GET',
         success: function(response) {
             estoque = response.data[0].estoque
-            campo = self.attr('id').replace('produto', 'quantidade')
+            preco = response.data[0].preco
+
+            campoSaldo = self.attr('id').replace('produto', 'quantidade')
+            campoPreco = self.attr('id').replace('produto', 'valor_total')
+
             estoque_inicial = self.attr('id').replace('produto', 'inicial')
+            //preco_inicial = self.attr('id').replace('produto', 'preco')
+
             // estoque inicial
             $('#'+estoque_inicial).val(estoque)
+            $('#'+preco_inicial).val(preco)
+
             // remover o valor do campo quantidade
-            $('#'+campo).val('')
+            $('#'+campoSaldo).val('')
+            $('#'+campoPreco).val('')
         },
         error: function(xhr) {
             }
@@ -158,23 +189,38 @@
     $(document).on('change', '.clQuantidade', function() {
         quantidade = $(this).val();
         //calculo sabtração estoque
-        saldo =  Number(estoque) - Number(quantidade);
-        campo = $(this).attr('id').replace('quantidade', 'saldo')
+        campoSaldo = $(this).attr('id').replace('quantidade', 'saldo')
         campo_estoque_inicial = $(this).attr('id').replace('quantidade', 'inicial')
         estoque_inicial = $('#'+campo_estoque_inicial).val()
-        saldo =  Number(estoque_inicial) - Number(quantidade);
-        if(saldo < 0){
+
+        campoPreco = $(this).attr('id').replace('quantidade', 'valor_total')
+        campo_preco_inicial = $(this).attr('id').replace('quantidade', 'preco')
+        precos = $('#'+campo_preco_inicial).val()
+
+        // Cálculo do valor total
+        saldos =  Number(estoque_inicial) - Number(quantidade);
+        valorTotal = parseFloat(preco) * Number(quantidade);
+
+
+        if(saldos < 0){
             alert('Quantidade digitada maior que saldo disponivel ou negativa.')
             $('#'+campo).val('')
             return
         }
+
         //Desabilita o campo saldo
-        $('#'+campo).prop('type', 'hidden')
+        $('#'+campoSaldo).prop('type', 'hidden')
+        $('#'+campoPreco).prop('type', 'hidden')
+
         //atribui o saldo ao campo saldo
-        $('#'+campo).val(saldo)
-        campo2 = $(this).attr('id').replace('quantidade', 'saldo-span')
+        $('#'+campoSaldo).val(saldos)
+        $('#'+campoPreco).val(valorTotal)
+        campoSaldo2 = $(this).attr('id').replace('quantidade', 'saldo-span')
+        campoPreco2 = $(this).attr('id').replace('quantidade', 'valor_total-span')
+
         //Atribui o saldo ao campo 'id_estoque-x-saldo-span'
-        $('#'+campo2).text(saldo)
+        $('#'+campoSaldo2).text(saldos)
+        $('#'+campoPreco2).text(valorTotal)
     });
 
 

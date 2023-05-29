@@ -1,6 +1,8 @@
 {% extends "base.html" %}
-
 {% block content %}
+{% block title %}
+<title>Detalhes Cliente: {{ object }}</title>
+{% endblock title %}
 {% if user.is_authenticated %}
 
 <div class="page-header">

@@ -125,7 +125,7 @@ function renderiza_produtos_mais_vendidos(url){
         const ctx = document.getElementById('produtos_mais_vendidos').getContext('2d');
         var cores_produtos_mais_vendidos = gera_cor(qtd=6)
         const myChart = new Chart(ctx, {
-            type: 'doughnut',
+            type: 'bar',
             data: {
                 labels: data.labels,
                 datasets: [{
@@ -152,7 +152,7 @@ function renderiza_produtos_mais_entraram(url){
         const ctx = document.getElementById('produtos_mais_entraram').getContext('2d');
         var cores_produtos_mais_entraram = gera_cor(qtd=6)
         const myChart = new Chart(ctx, {
-            type: 'doughnut',
+            type: 'bar',
             data: {
                 labels: data.labels,
                 datasets: [{

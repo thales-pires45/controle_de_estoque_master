@@ -3,6 +3,9 @@
 {% load widget_tweaks %}
 {% load bootstrap %}
 {% block content %}
+{% block title %}
+<title>Cadastro Cliente</title>
+{% endblock title %}
 {% if user.is_authenticated %}
 <div class="row">
     <div class="cols">

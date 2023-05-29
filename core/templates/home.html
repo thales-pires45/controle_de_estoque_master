@@ -2,18 +2,20 @@
 {% load static %}
 {% block content %}
 {% block css %}
-
+{% block title %}
+<title>Dashboard</title>
+{% endblock title %}
 <style>
 
     h1{
-        font-size: 25px;
+        font-size: 20px;
     }
     .informacoes_basicas {
         display: flex;
         justify-content: center;
         align-items: center;
         background-color: #181C24;
-        height: 65px;
+        height: 45px;
         position: relative;
         width: 100%;
         margin-right: auto;
@@ -30,11 +32,10 @@
     }
     .center{
         display: flex;
-        font-size: 25px;
+        font-size: 20px;
         align-items: center;
         justify-content: center;
     }
-
 
 </style>
 
@@ -67,12 +68,12 @@
     <div class="col-md">
         <br>
         <h1>Saida:</h1>
-        <canvas id="faturamento_mensal" width="300" height="100"></canvas>
+        <canvas id="faturamento_mensal" width="270" height="150"></canvas>
     </div>
     <div class="col-md">
         <br>
         <h1>Entrada:</h1>
-        <canvas id="entrada_mensal" width="300" height="100"></canvas>
+        <canvas id="entrada_mensal" width="270" height="150"></canvas>
     </div>
 </div>
 
@@ -80,12 +81,12 @@
     <div class="col-md">
         <br>
         <h1>Produtos mais Vendidos:</h1>
-        <canvas id="produtos_mais_vendidos" width="300" height="100"></canvas>
+        <canvas id="produtos_mais_vendidos" width="270" height="150"></canvas>
     </div>
     <div class="col-md">
         <br>
         <h1>Produtos que mais Entraram:</h1>
-        <canvas id="produtos_mais_entraram" width="300" height="100"></canvas>
+        <canvas id="produtos_mais_entraram" width="270" height="150"></canvas>
     </div>
 </div>
 
